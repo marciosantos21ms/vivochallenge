@@ -1,0 +1,19 @@
+CREATE TABLE `bot` (
+  `id` char(36) NOT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `message` (
+  `conversationId` char(36) NOT NULL,
+  `timestamp` varchar(45) NOT NULL,
+  `from_` char(36) NOT NULL,
+  `to` char(36) NOT NULL,
+  `text` varchar(100) NOT NULL,
+  `id` varchar(36) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `botFrom_idx` (`from_`),
+  KEY `botTo_idx` (`to`),
+  CONSTRAINT `botFrom` FOREIGN KEY (`from_`) REFERENCES `bot` (`id`),
+  CONSTRAINT `botTo` FOREIGN KEY (`to`) REFERENCES `bot` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
